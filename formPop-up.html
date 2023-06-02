@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>form-popup</title>
+</head>
+<body>
+	<div class="popup" id="popup">
+		<button class="fechar" onclick="fechar(this)">X</button>
+		<h2 class="bemvindo">Bem Vindo</h2>
+		<div class="popgrid">
+			<div class="popimg">
+				<svg viewBox="0 0 36 36" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" width="80" height="80"><title>Sojourner Truth</title><mask id="mask__beam" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36"><rect width="36" height="36" rx="72" fill="#FFFFFF"></rect></mask><g mask="url(#mask__beam)"><rect width="36" height="36" fill="#f0a830"></rect><rect x="0" y="0" width="36" height="36" transform="translate(6 -2) rotate(296 18 18) scale(1.2)" fill="#fcebb6" rx="6"></rect><g transform="translate(0 -4) rotate(6 18 18)"><path d="M15 21c2 1 4 1 6 0" stroke="#000000" fill="none" stroke-linecap="round"></path><rect x="13" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect><rect x="21" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect></g></g></svg>
+			</div>
+			<div class="poptxt">
+				<p id="popnome">Nome: </p>
+			</div>
+		</div>
+	</div>
+	<div class="escuro" id="escuro"></div>
+	<div class="formulario">
+		<form id="form">
+			<input type="text" name="name" placeholder="nome" required>
+			<input type="password" name="senha" placeholder="senha" required>
+			<button type="submit">Enviar</button>
+		</form>
+	</div>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.escuro{
+			position: fixed;
+			height: 100%;
+			width: 100%;
+			background: rgba(0, 0, 0, 0.29);
+			top: 0;
+			left: 0;
+			display: none;
+		}
+
+		.popup{
+			position: fixed;
+			z-index: 2;
+			top: 0;
+			left: 50%;
+			transform: translate(-50%, 0%);
+			width: 30vw;
+			background: white;
+			display: none;
+			text-align: center;
+			border-radius: 0px 0px 30px 30px;
+		}
+		.popgrid{
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+		}
+		.popimg svg{
+			width: 100%;
+		}
+		.poptxt{
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+		}
+		.fechar{
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 8px;
+			background: red;
+			color: white;
+			height: 20px;
+			width: 20px;
+			border: none;
+			border-radius: 50%;
+		}
+	</style>
+	<script>
+		let forme = document.getElementById("form")
+		forme.addEventListener("submit",dados)
+		function dados(event){
+			event.preventDefault()
+			let data = new FormData(this)
+			let nome = data.get("name")
+
+			let popup = document.getElementById("popup")
+			let popNome = document.getElementById("popnome")
+			popNome.innerHTML = "Nome: "+nome
+			popup.style.display = "block"
+			escuro = document.getElementById("escuro").style.display = "block"
+		}
+
+		function fechar(btn){
+			pai = btn.parentElement
+			pai.style.display = "none"
+			escuro = document.getElementById("escuro").style.display = "none"
+		}
+	</script>
+</body>
+</html>
