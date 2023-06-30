@@ -30,6 +30,12 @@ function tocar(audio){
         <source src="playlist/`+nome+`" type="audio/wav" id="player">
     </audio>
     `
+    repeat(nome,player)
+    
+}
+
+function repeat(nome,player){
+    let som = document.getElementById('som')
     som.addEventListener("ended", () =>{
         let index = null;
         for (let i = 0; i < files.length; i++){
@@ -38,13 +44,16 @@ function tocar(audio){
             }
 
         }
-        if (index == files.length){
+        if (index == (files.length -1)){
             index = 0
             player.innerHTML = `
                 <audio controls autoplay id='som'>
                     <source src="playlist/`+files[index].name+`" type="audio/wav" id="player">
                 </audio>
                 `
+                nome = files[index].name
+                repeat(nome,player)
+
         }else{
             index += 1
             player.innerHTML = `
@@ -52,11 +61,11 @@ function tocar(audio){
                     <source src="playlist/`+files[index].name+`" type="audio/wav" id="player">
                 </audio>
                 `
+                nome = files[index].name
+                repeat(nome,player)
         }
     })
-    
 }
-
 
 function formatDuration(duration) {
     const minutes = Math.floor(duration / 60);
